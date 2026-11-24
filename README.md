@@ -35,6 +35,8 @@ This installs the default branch (`main`) at the time of installation. DSH does 
 
 The bundle does not restrict the Host platform. It uses the standard Web Notification API in the DSH renderer, so it runs wherever DSH Desktop runs. Windows shows notifications as system toasts; make sure notifications are enabled for DeepSeek Harness in Windows Settings.
 
+Windows caps a toast's `tag` at 16 characters and silently drops longer ones, so the bundle tags each notification with a short hash of the event and Session id instead of using the full id.
+
 ## Development
 
 This repository is the installed package. Link it into a profile with **Plugins → Add plugin → absolute directory**, then edit `client.js` or `index.js`; Client HMR updates an open page.

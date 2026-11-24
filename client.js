@@ -169,6 +169,23 @@ window.__ModuleLoader__.load({
           }, 400);
         }
 
+        /**
+         * Short, stable notification tag for one event/session pair.
+         *
+         * Windows toast tags are capped at 16 characters; a longer tag makes
+         * WinRT drop the whole toast without raising a catchable error, so the
+         * long session id is hashed down (FNV-1a 32-bit, base36).
+         */
+        function shortTag(event, sessionId) {
+          let hash = 0x811c9dc5;
+          const source = `${event}:${sessionId ?? ''}`;
+          for (let i = 0; i < source.length; i += 1) {
+            hash ^= source.charCodeAt(i);
+            hash = Math.imul(hash, 0x01000193) >>> 0;
+          }
+          return `dsh:${event === 'turn' ? 't' : 'p'}:${hash.toString(36)}`;
+        }
+
         /** Show at most one notification for one concrete event. */
         function notify(kind, sessionId, detail) {
           if (disposed) return;
@@ -190,7 +207,7 @@ window.__ModuleLoader__.load({
           const body = event === 'turn'
             ? t(turnKey, { title: label })
             : t(pendingKey, { title: label });
-          const tag = `desktop-notify:${event}:${sessionId ?? 'none'}`;
+          const tag = shortTag(event, sessionId);
           try {
             const notification = new globalThis.Notification(title, { body, silent: true, tag });
             remember(notification);
