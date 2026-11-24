@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Desktop notifications",
+    "description": "Sends one system notification when a turn finishes or when a question or approval is waiting, but only while the DSH window is not in the foreground. Allow notifications for DeepSeek Harness in your system settings; clicking the notification focuses DSH and opens the session that produced it."
+  }
+}
