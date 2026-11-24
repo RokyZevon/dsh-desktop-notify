@@ -9,19 +9,19 @@ Sends one system notification when a turn finishes, or when a question or approv
 
 ## Install
 
-In DSH Desktop, open **Plugins**, choose **Add plugin**, and enter a commit-pinned Git address:
+In DSH Desktop, open **Plugins**, choose **Add plugin**, and enter the repository:
 
 ```text
-github:RokyZevon/dsh-desktop-notify#<40-character commit>
+github:RokyZevon/dsh-desktop-notify
 ```
 
 Or, with the `dsh` CLI on your `PATH`:
 
 ```bash
-dsh plugin --profile desktop add 'github:RokyZevon/dsh-desktop-notify#<40-character commit>'
+dsh plugin --profile desktop add 'github:RokyZevon/dsh-desktop-notify'
 ```
 
-Use a full commit SHA. A tag or branch name also installs, but DSH cannot update such an installation in place.
+This installs the default branch (`main`) at the time of installation. DSH does not offer in-place updates for Git installs; to update, remove the bundle and install it again.
 
 ## Behavior
 
